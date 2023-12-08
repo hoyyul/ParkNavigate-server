@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  navigation:
+    driver: bridge
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_DATABASE=ParkNavigate
+      - MYSQL_ROOT_PASSWORD=ParkNavigate
+    volumes:
+      - ./config/sql:/docker-entrypoint-initdb.d/
+    ports:
+      - 3306:3306
+    networks:
+      - navigation
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ./config/redis:/data
+    command: redis-server --appendonly yes

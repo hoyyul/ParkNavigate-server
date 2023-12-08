@@ -1,0 +1,16 @@
+server:
+  address: 8080
+  env: release
+
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  database: ParkNavigate
+  username : root
+  password: root
+  charset: utf8mb4
+
+redis:
+  address: 127.0.0.1:6379
+  password:
+  pool_size: 100

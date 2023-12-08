@@ -1,0 +1,29 @@
+package resp
+
+import (
+	"ParkNavigate/pkg/errmsg"
+
+	"github.com/gin-gonic/gin"
+)
+
+type Response struct {
+	Code int    `json:"code"`
+	Data any    `json:"data"`
+	Msg  string `json:"msg"`
+}
+
+func SendWithOk(status int, data interface{}, msg string, ctx *gin.Context) {
+	ctx.JSON(status, Response{
+		Code: errmsg.SUCCESS,
+		Data: data,
+		Msg:  msg,
+	})
+}
+
+func SendWithNotOk(status int, msg string, ctx *gin.Context) {
+	ctx.JSON(status, Response{
+		Code: errmsg.FAILURE,
+		Data: map[string]interface{}{}, // null in json
+		Msg:  msg,
+	})
+}
