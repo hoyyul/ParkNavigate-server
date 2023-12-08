@@ -1,6 +1,7 @@
 # ParkNavigate-server
 
 ## Directory Structure
+```
 .
 ├── app
 │   ├── gateway
@@ -18,3 +19,4 @@
 │   └── resp
 ├── setting
 └── docker-compose.yaml
+```
