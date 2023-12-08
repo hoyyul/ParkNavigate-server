@@ -7,7 +7,7 @@
 │   │   ├── cmd
 │   │   ├── internal
 │   │   ├── middleware
-│   │   ├── router
+│   │   ├── routers
 │   │   └── rpc
 │   └── navigation
 ├── config
