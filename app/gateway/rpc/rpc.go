@@ -2,6 +2,7 @@ package rpc
 
 import (
 	"ParkNavigate/global"
+	"ParkNavigate/pkg/pb/navigation_pb"
 	"context"
 	"time"
 
@@ -13,7 +14,7 @@ var (
 	ctx    context.Context
 	cancel context.CancelFunc
 
-	//navigationClient
+	NavigationClient navigation_pb.NavigationServiceClient
 )
 
 func Init() {
@@ -25,12 +26,12 @@ func Init() {
 	}
 
 	// navigation service port
-	target := "127.0.0.1:50051"
+	target := "127.0.0.1:8081"
 
 	conn, err := grpc.DialContext(ctx, target, opts...)
 	if err != nil {
 		global.Logger.Panic(err)
 	}
 
-	//navigationClient := service.NewRouteGuideClient(conn)
+	NavigationClient = navigation_pb.NewNavigationServiceClient(conn)
 }

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ParkNavigate/app/gateway/router"
+	"ParkNavigate/app/gateway/routers"
 	"ParkNavigate/app/gateway/rpc"
 	"ParkNavigate/global"
 	"ParkNavigate/setting"
@@ -19,7 +19,7 @@ func main() {
 	setting.InitLogger()
 
 	// redis setting
-	setting.InitRedis()
+	//setting.InitRedis()
 
 	// grpc setting
 	rpc.Init()
@@ -29,7 +29,7 @@ func main() {
 
 // bind router and http server
 func startListenAndServe() {
-	r := router.NewRouter()
+	r := routers.NewRouter()
 	server := &http.Server{
 		Addr:           ":" + global.Config.Server.Address,
 		Handler:        r,

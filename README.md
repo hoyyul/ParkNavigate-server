@@ -6,12 +6,13 @@
 ├── app
 │   ├── gateway
 │   │   ├── cmd
-│   │   ├── internal
+│   │   ├── internal 
 │   │   ├── middleware
 │   │   ├── routers
 │   │   └── rpc
-│   └── navigation
+│   └── navigation 
 ├── config
+├── data
 ├── global
 ├── pkg
 │   ├── errmsg

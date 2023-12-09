@@ -3,47 +3,33 @@ syntax="proto3";
 // protoc -I pkg/pb pkg/pb/*.proto --go_out=. --go-grpc_out=. 
 option go_package = "/pkg/pb/navigation_pb";
 
-package navagition_pb;
+package navigation_pb;
 
-message UserRequest{
-  // @inject_tag: json:"nick_name" form:"nick_name" uri:"nick_name"
-  string NickName=1;
-  // @inject_tag: json:"user_name" form:"user_name" uri:"user_name"
-  string UserName=2;
-  // @inject_tag: json:"password" form:"password" uri:"password"
-  string Password=3;
-  // @inject_tag: json:"password_confirm" form:"password_confirm" uri:"password_confirm"
-  string PasswordConfirm=4;
+
+message Location{
+  // @inject_tag: json:"name" form:"name" uri:"name"
+  string Name=1;
+  // @inject_tag: json:"latitude" form:"latitude" uri:"latitude"
+  float Latitude=2;
+  // @inject_tag: json:"longitude" form:"longitude" uri:"longitude"
+  float Longitude=3;
 }
 
-message UserResponse{
-  // @inject_tag: json:"user_id" form:"user_id" uri:"user_id"
-  int64 UserId=1;
-  // @inject_tag: json:"nick_name" form:"nick_name" uri:"nick_name"
-  string NickName=2;
-  // @inject_tag: json:"user_name" form:"user_name" uri:"user_name"
-  string UserName=3;
+message NavigationRequest {
+  // @inject_tag: json:"lat" form:"lat" uri:"lat"
+  float Latitude=1;
+  // @inject_tag: json:"lng" form:"lng" uri:"lng“
+  float Longitude=2;
 }
 
-message UserDetailResponse{
-  // @inject_tag: json:"user_response" form:"user_response" uri:"user_response"
-  UserResponse UserDetail=1;
-  // @inject_tag: json:"code" form:"code" uri:"code"
+message NavigationResponse {
+  // @inject_tag: json:"location" form:"location"
+  repeated Location Location=1;
+  // @inject_tag: json:"code" form:"code"" uri:"code""
   int64 Code=2;
 }
 
-message UserCommonResponse{
-  // @inject_tag: json:"code" form:"code" uri:"code"
-  int64 Code=1;
-  // @inject_tag: json:"msg" form:"msg" uri:"msg"
-  string Msg=2;
-  // @inject_tag: json:"data" form:"data" uri:"data"
-  string Data=3;
-}
 
-
-service UserService{
-  rpc UserLogin(UserRequest) returns(UserDetailResponse);
-  rpc UserRegister(UserRequest) returns(UserCommonResponse);
-  rpc UserLogout(UserRequest) returns(UserCommonResponse);
+service NavigationService{
+  rpc ShowParkings(NavigationRequest) returns(NavigationResponse);
 }

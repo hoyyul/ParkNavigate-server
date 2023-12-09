@@ -1,31 +1,30 @@
 package setting
 
 import (
-	"fmt"
-
+	"ParkNavigate/config"
 	"ParkNavigate/global"
 	"log"
 	"os"
 
-	"github.com/spf13/viper"
+	"gopkg.in/yaml.v2"
 )
+
+const ConfigFile = "/config/config.yaml"
 
 func InitConfig() {
 	if global.Config != nil {
 		return
 	}
+	c := &config.Config{}
 	workDir, _ := os.Getwd()
-	viper.SetConfigName("config") // name of config file (without extension)
-	viper.SetConfigType("yaml")   // REQUIRED if the config file does not have the extension in the name
-	viper.AddConfigPath(workDir + "/config")
-	err := viper.ReadInConfig() // Find and read the config file
-	if err != nil {             // Handle errors reading the config file
-		panic(fmt.Errorf("fatal error config file: %w", err))
-	}
-	err = viper.Unmarshal(&global.Config)
+	yamlConf, err := os.ReadFile(workDir + ConfigFile)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("Get yamlConf error: %s\n", err)
 	}
-
+	err = yaml.Unmarshal(yamlConf, c)
+	if err != nil {
+		log.Fatalf("Get yaml Unmarchsal error: %s\n", err)
+	}
 	log.Println("Configuration file loads successfully.")
+	global.Config = c
 }
