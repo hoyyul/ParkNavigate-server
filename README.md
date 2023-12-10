@@ -6,11 +6,13 @@
 ├── app
 │   ├── gateway
 │   │   ├── cmd
-│   │   ├── internal 
+│   │   ├── internal
 │   │   ├── middleware
 │   │   ├── routers
 │   │   └── rpc
-│   └── navigation 
+│   └── navigation
+│       ├── cmd
+│       └── internal
 ├── config
 ├── data
 ├── global
@@ -18,6 +20,5 @@
 │   ├── errmsg
 │   ├── pb
 │   └── resp
-├── setting
-└── docker-compose.yaml
+└── setting
 ```
